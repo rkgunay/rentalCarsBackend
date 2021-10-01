@@ -10,60 +10,45 @@ namespace Business.Concrete
 {
     public class CarManager : ICarService
     {
-        ICarDal _inMemoryCarDal;
-        public CarManager(ICarDal inMemoryCarDal)
+        ICarDal _carDal;
+        public CarManager(ICarDal carDal)
         {
-            _inMemoryCarDal = inMemoryCarDal;
+            _carDal = carDal;
         }
 
         public void Add(Car car)
         {
-            _inMemoryCarDal.Add(car);
+            if(car.Description.Length>2 && car.DailyPrice>0)
+            _carDal.Add(car);
+            else Console.WriteLine("Hatalı Giriş Yaptınız.");
         }
+
 
         public void Delete(Car car)
         {
-            _inMemoryCarDal.Delete(car);
+            _carDal.Delete(car);
         }
 
         public List<Car> GetAll()
         {
-            return _inMemoryCarDal.GetAll();
+            return _carDal.GetAll();
         }
 
-        public List<Car> GetById(int Id)
+        public List<Car> GetCarsByBrandId(string id)
         {
-            return _inMemoryCarDal.GetById(Id);
+            return _carDal.GetAll(c => c.BrandId == id);
+        }
+
+        public List<Car> GetCarsByColorId(string id)
+        {
+            return _carDal.GetAll(c => c.ColorId == id); 
         }
 
         public void Update(Car car)
         {
-            _inMemoryCarDal.Update(car);
+            _carDal.Update(car);
         }
 
-        public void ListAllCars()
-        {
-            foreach (var car in _inMemoryCarDal.GetAll())
-            {
-                Console.WriteLine("Id : " +car.Id);
-                Console.WriteLine("Marka: " +car.BrandId);
-                Console.WriteLine("Renk Id'si: " +car.ColorId);
-                Console.WriteLine("Günlük Ücreti : " +car.DailyPrice);
-                Console.WriteLine("Model Yılı : " +car.ModelYear);
-                Console.WriteLine("Açıklama : " +car.Description);
-                Console.WriteLine("\n");
-            }
-        }
-
-        public void GetCarById(int Id)
-        {
-            List<Car> car = GetById(Id);
-            Console.WriteLine("Id : " + car[0].Id);
-            Console.WriteLine("Marka: " + car[0].BrandId);
-            Console.WriteLine("Renk Id'si: " + car[0].ColorId);
-            Console.WriteLine("Günlük Ücreti : " + car[0].DailyPrice);
-            Console.WriteLine("Model Yılı : " + car[0].ModelYear);
-            Console.WriteLine("Açıklaması " + car[0].Description);
-        }
+     
     }
 }

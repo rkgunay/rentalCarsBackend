@@ -1,4 +1,5 @@
 ﻿using Business.Concrete;
+using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.InMemory;
 using Entities.Concrete;
 using System;
@@ -14,34 +15,41 @@ namespace ConsoleUI
                 BrandId = "2",
                 ColorId = "4",
                 DailyPrice = 1590,
-                Description = "Yeni geldi bu araba.",
+                Description = "Honda",
                 ModelYear = "2021"
             };
-     
-            CarManager carManager = new CarManager(new InMemoryCarDal());
-            Console.WriteLine("****Tüm araçlar Listelendi \n");
-            carManager.ListAllCars();
+                Car car2= new Car {
+                Id = 6,
+                BrandId = "2",
+                ColorId = "4",
+                DailyPrice = -15,
+                Description = "Honda",
+                ModelYear = "2021"
+            };
 
-            carManager.Add(car1);
-            Console.WriteLine("****5 id'li 2021 model araba eklendi. \n");
-            carManager.ListAllCars();
+            CarManager carManager = new CarManager(new EfCarDal());
 
-            car1.Description = "Yeni geldi bu araba. 3 Yıllık.";
-            car1.ModelYear = "2019";
+            //DailyPrice 0'dan küçük olduğu için hata verecek.
+            carManager.Add(car2);
+            
+            foreach (var car in carManager.GetAll())
+            {
+                Console.WriteLine(car.Id);
+                Console.WriteLine(car.Description);
+            }     
+            foreach (var car in carManager.GetCarsByBrandId("2"))
+            {
+                Console.WriteLine(car.Description);
+                Console.WriteLine(car.BrandId);
+            }
+             foreach (var car in carManager.GetCarsByColorId("4"))
+            {
+                Console.WriteLine(car.Description);
+                Console.WriteLine(car.ColorId);
+            }
 
-            carManager.Update(car1);
-            Console.WriteLine("****5 id'li araba güncellendi. \n");
-            carManager.ListAllCars();
 
-            carManager.Delete(car1);
-            Console.WriteLine("****5 id'li 2021 model araba silindi. \n");
-            carManager.ListAllCars();
 
-        
-
-            carManager.GetById(3);
-            Console.WriteLine("****Id ile araba getirildi. Doblo olan. \n");
-            carManager.ListAllCars();
         }
     
     }

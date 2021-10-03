@@ -1,5 +1,6 @@
 ﻿using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,8 +20,9 @@ namespace DataAccess.Concrete.InMemory
                 new Car
                 {
                     Id = 1,
-                    BrandId = "1",
-                    ColorId = "1",
+                    Name = "Mercedes Benz Premium Model",
+                    BrandId = 1,
+                    ColorId = 1,
                     DailyPrice = 600,
                     Description = "Temiz arazi aracı",
                     ModelYear = "2005"
@@ -28,8 +30,9 @@ namespace DataAccess.Concrete.InMemory
                 new Car
                 {
                     Id = 2,
-                    BrandId = "1",
-                    ColorId = "3",
+                    Name = "Rolls Royce ATX 3.52",
+                    BrandId = 1,
+                    ColorId = 3,
                     DailyPrice = 1700,
                     Description = "Spor araba",
                     ModelYear = "2018"
@@ -37,8 +40,9 @@ namespace DataAccess.Concrete.InMemory
                 new Car
                 {
                     Id = 3,
-                    BrandId = "4",
-                    ColorId = "2",
+                    Name = "Renault Doblo",
+                    BrandId = 3,
+                    ColorId = 4,
                     DailyPrice = 500,
                     Description = "Enişteler için temiz Doblo",
                     ModelYear = "2004"
@@ -46,8 +50,9 @@ namespace DataAccess.Concrete.InMemory
                 new Car
                 {
                     Id = 4,
-                    BrandId = "2",
-                    ColorId = "5",
+                    Name = "Sweather Wheather Klibindeki Araba",
+                    BrandId = 2,
+                    ColorId = 4,
                     DailyPrice = 900,
                     Description = "Bu arabayla sahilde bir gezin derim",
                     ModelYear = "2016"
@@ -84,6 +89,11 @@ namespace DataAccess.Concrete.InMemory
         public List<Car> GetById(int Id)
         {
             return _cars.Where(c => c.Id == Id).ToList();
+        }
+
+        public List<CarDetailDto> GetCarDetails()
+        {
+            throw new NotImplementedException();
         }
 
         public void Update(Car car)

@@ -19,7 +19,6 @@ namespace DataAccess.Concrete.InMemory
             {
                 new Car
                 {
-                    Id = 1,
                     Name = "Mercedes Benz Premium Model",
                     BrandId = 1,
                     ColorId = 1,
@@ -29,7 +28,6 @@ namespace DataAccess.Concrete.InMemory
                 }, 
                 new Car
                 {
-                    Id = 2,
                     Name = "Rolls Royce ATX 3.52",
                     BrandId = 1,
                     ColorId = 3,
@@ -39,7 +37,6 @@ namespace DataAccess.Concrete.InMemory
                 }, 
                 new Car
                 {
-                    Id = 3,
                     Name = "Renault Doblo",
                     BrandId = 3,
                     ColorId = 4,
@@ -49,7 +46,6 @@ namespace DataAccess.Concrete.InMemory
                 }, 
                 new Car
                 {
-                    Id = 4,
                     Name = "Sweather Wheather Klibindeki Araba",
                     BrandId = 2,
                     ColorId = 4,
@@ -67,7 +63,7 @@ namespace DataAccess.Concrete.InMemory
 
         public void Delete(Car car)
         {
-            Car carToDelete = _cars.SingleOrDefault(c => c.Id == car.Id);
+            Car carToDelete = _cars.SingleOrDefault(c => c.CarId == car.CarId);
             _cars.Remove(carToDelete);
         }
 
@@ -88,7 +84,7 @@ namespace DataAccess.Concrete.InMemory
 
         public List<Car> GetById(int Id)
         {
-            return _cars.Where(c => c.Id == Id).ToList();
+            return _cars.Where(c => c.CarId == Id).ToList();
         }
 
         public List<CarDetailDto> GetCarDetails()
@@ -98,7 +94,7 @@ namespace DataAccess.Concrete.InMemory
 
         public void Update(Car car)
         {
-            Car carToUpdate = _cars.SingleOrDefault(c => c.Id == car.Id);
+            Car carToUpdate = _cars.SingleOrDefault(c => c.CarId == car.CarId);
             carToUpdate.BrandId = car.BrandId;
             carToUpdate.ColorId = car.ColorId;
             carToUpdate.DailyPrice = car.DailyPrice;

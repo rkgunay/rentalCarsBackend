@@ -8,5 +8,6 @@ namespace Business.Constants
     {
         public static string CarAdded = "Araba eklendi";
         public static string CarEntryInvalid = "Hatalı bilgi girişi yaptınız";
+        internal static string LimitExceeded = "Fotoğraf limiti aşıldı";
     }
 }

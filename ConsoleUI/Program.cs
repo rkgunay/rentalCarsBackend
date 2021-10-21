@@ -52,22 +52,22 @@ namespace ConsoleUI
             }
         }
 
-        private static void TestUsers()
-        {
-            User user1 = new User { 
+        //private static void TestUsers()
+        //{
+        //    User user1 = new User { 
          
-                FirstName = "Rıdvan",
-                LastName = "Günay",
-                Email = "ridvankgunay@gmail.com",
-                Password = "123456"
-            };
-            UserManager userManager = new UserManager(new EfUserDal());
-            foreach (var user in userManager.GetAll().Data)
-            {
-                Console.WriteLine(user.FirstName  +user.LastName);
-            }
+        //        FirstName = "Rıdvan",
+        //        LastName = "Günay",
+        //        Email = "ridvankgunay@gmail.com",
+        //        Password = "123456"
+        //    };
+        //    UserManager userManager = new UserManager(new EfUserDal());
+        //    foreach (var user in userManager.GetAll().Data)
+        //    {
+        //        Console.WriteLine(user.FirstName  +user.LastName);
+        //    }
 
-        }
+        //}
 
         private static void TestCars()
         {

@@ -13,7 +13,7 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfCarDal : EfEntityRepositoryBase<Car, CarRentalContext>, ICarDal
     {
-        public List<CarDetailDto> GetCarDetails()
+        public List<CarDetailDto> GetCarDetails(Expression<Func<CarDetailDto, bool>> filter = null)
         {
             using (CarRentalContext context = new CarRentalContext())
             {
@@ -22,17 +22,21 @@ namespace DataAccess.Concrete.EntityFramework
                              join co in context.Colors
                              on ca.ColorId equals co.ColorId
                              join br in context.Brands
-                             on ca.BrandId equals br.BrandId
+                             on ca.BrandId equals br.BrandId 
+                           
 
-                             select new CarDetailDto
+                             select new CarDetailDto 
                              {
+
                                  Id = ca.CarId,
+                                 ColorId = ca.ColorId,
+                                 BrandId = ca.BrandId,
                                  Name = ca.Name,
                                  ColorName = co.ColorName,
                                  BrandName = br.BrandName,
                                  DailyPrice = ca.DailyPrice
                              };
-                return result.ToList();
+                return filter == null ? result.ToList() : result.Where(filter).ToList();
             }
         }
     }

@@ -68,12 +68,19 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(c => c.ColorId == id));
         }
-
+        [CacheAspect]
         public IDataResult<List<CarDetailDto>>GetCarsByColorAndBrandId(int colorId, int brandId)
         {
             return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(c => c.ColorId == colorId && c.BrandId == brandId
             ));
         }
+        [CacheAspect]
+        public IDataResult<List<CarDetailDto>> GetCarDetailsById(int id)
+        {
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(c => c.Id == id));
+        }
+
+
         [SecuredOperation("car.add,admin")]
         [CacheRemoveAspect("ICarService.Get")]
         public IResult Update(Car car)
@@ -81,8 +88,6 @@ namespace Business.Concrete
             _carDal.Update(car);
             return new SuccessResult();
         }
-
-
 
      
     }
